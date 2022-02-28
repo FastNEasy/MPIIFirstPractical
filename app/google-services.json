@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "385355679797",
-    "project_id": "homeworkmpii",
-    "storage_bucket": "homeworkmpii.appspot.com"
+    "project_number": "771078887890",
+    "project_id": "mpiifirstpractical",
+    "storage_bucket": "mpiifirstpractical.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:385355679797:android:ebcaf876cfb6ffff39c97c",
+        "mobilesdk_app_id": "1:771078887890:android:1afdf502d6da23714c100b",
         "android_client_info": {
           "package_name": "com.example.practical1_java"
         }
       },
       "oauth_client": [
         {
-          "client_id": "385355679797-mtg8vtrc9tp9d406lm3iha0tt3go5clt.apps.googleusercontent.com",
+          "client_id": "771078887890-cssa8kc2bd1nun17c47in8nhjli80m5m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyARl96EgDPEEe-lyykTll9qmPiCZKko83s"
+          "current_key": "AIzaSyDGSShWwCkC6e7B3BlHreriMhVCLMtjexo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "385355679797-mtg8vtrc9tp9d406lm3iha0tt3go5clt.apps.googleusercontent.com",
+              "client_id": "771078887890-cssa8kc2bd1nun17c47in8nhjli80m5m.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

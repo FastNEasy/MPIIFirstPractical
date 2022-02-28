@@ -21,7 +21,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -58,7 +62,32 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "started");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         setContentView(R.layout.activity_main);
+
+
     }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu1,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.audioItem){
+            Intent intent = new Intent(MainActivity.this, RecordActivity1.class);
+            startActivity(intent);
+
+            return true;
+        }
+        else if(id == R.id.deleteItem){
+            Toast.makeText(this, "pressed delete items", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void onClick(View view){
         checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
         dispatchTakePictureIntent();

@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Programmas/WORKSPACES/Android Projects/MPIIFirstPractical/app/src/main/res/drawable/ic_baseline_folder_24.xml" value="0.2675" />
+        <entry key="..\:/Programmas/WORKSPACES/Android Projects/MPIIFirstPractical/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.2675" />
+        <entry key="..\:/Programmas/WORKSPACES/Android Projects/MPIIFirstPractical/app/src/main/res/layout/activity_record.xml" value="0.358695652173913" />
+        <entry key="..\:/Programmas/WORKSPACES/Android Projects/MPIIFirstPractical/app/src/main/res/layout/activity_record1.xml" value="0.10866261398176291" />
+        <entry key="..\:/Programmas/WORKSPACES/Android Projects/MPIIFirstPractical/app/src/main/res/layout/customlayout.xml" value="0.358695652173913" />
+        <entry key="..\:/Programmas/WORKSPACES/Android Projects/MPIIFirstPractical/app/src/main/res/menu/menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Programmas/WORKSPACES/Android Projects/MPIIFirstPractical/app/src/main/res/menu/menu1.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/raivi/AndroidStudioProjects/Practical1_java/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/raivi/AndroidStudioProjects/Practical1_java/app/src/main/res/layout/fragment_swipe.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/raivi/AndroidStudioProjects/Practical1_java/app/src/main/res/layout/view_pager_item.xml" value="0.22826086956521738" />
