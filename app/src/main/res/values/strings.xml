@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Practical1_java</string>
+    <string name="btn_open_camera">Open Camera</string>
+</resources>
