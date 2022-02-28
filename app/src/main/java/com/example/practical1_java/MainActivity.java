@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int STORAGE_PERMISSION_CODE = 101;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String SHARED_PREFS_FILE = "sharedFile";
-    List<Uri> imgUri = new ArrayList<>();
+    List<Uri> imgUri = new ArrayList<>();//for files to  be added to the slider
     //List<String> imgUriStrings = new ArrayList<>();
     String currentPhotoPath;
     @Override
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,STORAGE_PERMISSION_CODE);
-        //loadData();
+        //loadData();//supposed to load data from preferences but created a crash
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "main activity");
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "started");
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick(View view){
+    public void onClick(View view){//camera opening button
         checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
         dispatchTakePictureIntent();
         Bundle bundle = new Bundle();
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void dispatchTakePictureIntent() {
+    private void dispatchTakePictureIntent() {//starts the camera intent
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    private File createImageFile() throws IOException {
+    private File createImageFile() throws IOException {//makes and saves the image file
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
@@ -146,15 +146,15 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if(resultCode == RESULT_OK){
                 File f = new File(currentPhotoPath);
-                ImageView thumbnail = findViewById(R.id.thumbnail);
+                ImageView thumbnail = findViewById(R.id.thumbnail);//image thumbnail
                 thumbnail.setImageURI(Uri.fromFile(f));
                 Log.d(TAG, "Absolute Url of img is: " + Uri.fromFile(f));
                 galleryAddPic(f);
-                imgUri.add(Uri.fromFile(f));
+                imgUri.add(Uri.fromFile(f));//adds to list that presents all the uri's in the running app
                 //imgUriStrings.add(Uri.fromFile(f).toString());
                 ViewPager2 imageViewPager = findViewById(R.id.viewPagerMain);
                 imageViewPager.setAdapter(new ViewPagerAdapter(this,imgUri));
-                //saveData();
+                //saveData(); // also caused the app crash, not implemented
             }
 
 
