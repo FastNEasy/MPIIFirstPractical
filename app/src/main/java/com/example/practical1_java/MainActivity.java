@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,23 +38,34 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private FirebaseAnalytics mFirebaseAnalytics;
     private static final String TAG = "MPII";
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int STORAGE_PERMISSION_CODE = 101;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String SHARED_PREFS_FILE = "sharedFile";
     List<Uri> imgUri = new ArrayList<>();
+    //List<String> imgUriStrings = new ArrayList<>();
     String currentPhotoPath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,STORAGE_PERMISSION_CODE);
         //loadData();
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "main activity");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "started");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         setContentView(R.layout.activity_main);
     }
     public void onClick(View view){
         checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
         dispatchTakePictureIntent();
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "button_clicked");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "opening_camera");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
 
@@ -110,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Absolute Url of img is: " + Uri.fromFile(f));
                 galleryAddPic(f);
                 imgUri.add(Uri.fromFile(f));
+                //imgUriStrings.add(Uri.fromFile(f).toString());
                 ViewPager2 imageViewPager = findViewById(R.id.viewPagerMain);
                 imageViewPager.setAdapter(new ViewPagerAdapter(this,imgUri));
                 //saveData();
@@ -123,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(imgUri);
-        editor.putString("TakenPictures", json);
+        //String json = gson.toJson(imgUriStrings);
+       // editor.putString("TakenPictures", json);
         editor.apply();
     }
     //cant load data into shared prefs
@@ -132,15 +145,19 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS_FILE, Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("TakenPictures", null);
-        Type type = new TypeToken<List<Uri>>() {}.getType();
-        imgUri = gson.fromJson(json, type);
-        if (imgUri == null){
-            imgUri = new ArrayList<>();
-        }else{
-            ViewPager2 imageViewPager = findViewById(R.id.viewPagerMain);
-            imageViewPager.setAdapter(new ViewPagerAdapter(this,imgUri));
-        }
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        //imgUriStrings = gson.fromJson(json, type);
+//        if (imgUriStrings == null){
+//            imgUriStrings = new ArrayList<>();
+//        }else{
+////            for(String str : imgUriStrings){
+////                imgUri.add(Uri.parse(str));
+////            }
+//            ViewPager2 imageViewPager = findViewById(R.id.viewPagerMain);
+//            imageViewPager.setAdapter(new ViewPagerAdapter(this,imgUri));
+//        }
     }
+
 
     public void checkPermission(String permission, int requestCode) {
         // Checking if permission is not granted
